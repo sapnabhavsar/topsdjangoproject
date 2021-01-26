@@ -1,0 +1,52 @@
+{% extends 'seller_header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+	<center>
+		<h1>Edit Product</h1>
+		{% if msg %}
+			<b style="color: red;">{{msg}}</b>
+		{% endif %}
+		<form name="update_prodduct" method="post" action="{% url 'seller_product_edit' pk=product.pk %}" enctype="multipart/form-data">
+			{% csrf_token %}
+			<table>
+				<tr>
+					<td>Product Category</td>
+					<td>{{product.product_category}}</td>
+				</tr>
+				<tr>
+					<td>Product Name</td>
+					<td><input type="text" name="product_name" value="{{product.product_name}}"></td>
+				</tr>
+				<tr>
+					<td>Product Price</td>
+					<td><input type="text" name="product_price" value="{{product.product_price}}"></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">
+						<img src="{{product.product_image.url}}" width="100px" height="100px">
+					</td>
+				</tr>
+				<tr>
+					<td>Product Image</td>
+					<td><input type="file" name="product_image"></td>
+				</tr>
+				<tr>
+					<td>Product Description</td>
+					<td><textarea rows="5" cols="22" name="product_desc">{{product.product_desc}}</textarea></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">
+						<input type="submit" value="Update Product" class="btn btn-primary">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</center>
+	
+</body>
+</html>
+{% endblock %}

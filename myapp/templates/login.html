@@ -1,0 +1,45 @@
+{% extends 'header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+<SCRIPT type="text/javascript">
+	window.history.forward();
+	function noBack() { window.history.forward(); }
+</SCRIPT>
+</HEAD>
+<BODY onload="noBack();" 
+	onpageshow="if (event.persisted) noBack();" onunload="">
+
+
+<center>
+		<h1>Login</h1>
+		{% if msg %}
+			<b style="color: red;">{{msg}}</b>
+		{% endif %}
+		<form name="login" method="post" action="{% url 'login' %}">
+			{% csrf_token %}
+			<table>
+				
+				<tr>
+					<td>Email</td>
+					<td><input type="text" name="email"></td>
+				</tr>
+				<tr>
+					<td>Password</td>
+					<td><input type="password" name="password"></td>
+				</tr>
+				<tr>
+					<td><input type="submit" value="Login" class="btn btn-primary"></td>
+					<td>
+						<a href="{% url 'forgot_password' %}"><input type="button" value="Forgot Password" class="btn btn-primary"></a>
+					</td>
+				</tr>
+			</table>
+		</form>
+	</center>
+
+
+</body>
+</html>
+{% endblock %}

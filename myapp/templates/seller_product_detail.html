@@ -1,0 +1,31 @@
+{% extends 'seller_header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<center><h1>View All Products</h1></center>
+<div class="row">	 	 
+		<div id="box" class="col-sm-3" style="margin-top: 10px;">
+			<div class="container">
+		  		<div class="card" style="width:250px">
+		    		<img class="card-img-top" src="{{product.product_image.url}}" alt="Card image" width=250px height=250px>
+		    			<div class="card-body">
+		      				<p class="card-title">Product Name : {{product.product_name}}</p>
+		      				<p class="card-text">Product Price : {{product.product_price}}</p>
+		      				<p class="card-text">Product Description : {{product.product_desc}}</p>
+		      				<a href="{% url 'seller_product_edit' pk=product.pk %}">
+		      					<input type="button" value="EDIT" class="btn btn-primary">
+		      				</a>
+		      				<a href="{% url 'seller_product_delete' pk=product.pk %}">
+		      					<input type="button" value="DELETE" class="btn btn-primary">
+		      				</a>
+		    			</div>
+		  		</div>	  
+			</div>
+		</div> 
+</div>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'seller_header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+	<center>
+		<h1>Add Product</h1>
+		{% if msg %}
+			<b style="color: red;">{{msg}}</b>
+		{% endif %}
+		<form name="add_prodduct" method="post" action="{% url 'seller_add_product' %}" enctype="multipart/form-data">
+			{% csrf_token %}
+			<table>
+				<tr>
+					<td>Product Category</td>
+					<td>
+						<select name="product_category">
+							<option>---Select Category---</option>
+							<option value="Kids">Kids</option>
+							<option value="Women">Women</option>
+							<option value="Men">Men</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Product Name</td>
+					<td><input type="text" name="product_name"></td>
+				</tr>
+				<tr>
+					<td>Product Price</td>
+					<td><input type="text" name="product_price"></td>
+				</tr>
+				<tr>
+					<td>Product Image</td>
+					<td><input type="file" name="product_image"></td>
+				</tr>
+				<tr>
+					<td>Product Description</td>
+					<td><textarea rows="5" cols="22" name="product_desc"></textarea></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">
+						<input type="submit" value="SUBMIT" class="btn btn-primary">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</center>
+	
+</body>
+</html>
+{% endblock %}

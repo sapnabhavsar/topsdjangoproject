@@ -1,0 +1,95 @@
+{% extends 'header.html' %}
+{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+{% block javascript %}
+  <script>
+    $("#id_username").change(function () {
+      var username = $(this).val();
+      $.ajax({
+        url: '/ajax/validate_username/',
+        data: {
+          'username': username
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            document.getElementById("email").innerHTML="Email Alrady Used";
+          }
+         
+        }
+      });
+
+    });
+  </script>
+{% endblock %}
+<style type="text/css">
+	.a1{
+		color: red;
+	}
+</style>
+<style type="text/css">
+	body{
+		background-image: url("{% static 'images/bg7.jpg' %}");
+	}
+</style>
+</head>
+<body>
+
+
+<center>
+		<h1>Signup</h1>
+		{% if msg %}
+			<b style="color: red;">{{msg}}</b>
+		{% endif %}
+		<form name="signup" method="post" action="{% url 'signup' %}">
+			{% csrf_token %}
+			<table>
+				<tr>
+					<td>User Type</td>
+					<td>
+						<input type="radio" name="usertype" value="user">User
+
+						<input type="radio" name="usertype" value="seller" style="margin-left: 70px;">Seller
+					</td>
+				</tr>
+				<tr>
+					<td>First Name</td>
+					<td><input type="text" name="fname" required="required"></td>
+				</tr>
+				<tr>
+					<td>Last Name</td>
+					<td><input type="text" name="lname" required="required"></td>
+				</tr>
+				<tr>
+					<td>Email</td>
+					<td><input type="text" name="email" required="required" id="id_username"></td>
+					<td><span class="a1" id="email"></span></td>
+				</tr>
+				<tr>
+					<td>Mobile</td>
+					<td><input type="text" name="mobile" required="required"></td>
+				</tr>
+				<tr>
+					<td>Password</td>
+					<td><input type="password" name="password" required="required"></td>
+				</tr>
+				<tr>
+					<td>Confirm Password</td>
+					<td><input type="password" name="cpassword" required="required"></td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" align="center">
+						<input type="submit" value="Signup" class="btn btn-primary">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</center>
+
+</body>
+</html>
+{% endblock %}

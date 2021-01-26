@@ -1,0 +1,49 @@
+{% extends 'header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript">
+		
+		window.addEventListener('contextmenu', function (e) { 
+  // do something here... 
+  e.preventDefault(); 
+}, false);
+	</script>
+</head>
+<body>
+
+
+<center>
+		<h1>Enter OTP</h1>
+		{% if msg %}
+			<b style="color: red;">{{msg}}</b>
+		{% endif %}
+		<form name="otp" method="post" action="{% url 'validate_otp' %}">
+			{% csrf_token %}
+			<table>
+				
+				<tr>
+					<td><input type="hidden" name="otp" value="{{otp}}"></td>
+					<td><input type="hidden" name="email" value="{{email}}"></td>
+					{% if myvar %}
+						<td><input type="hidden" name="myvar" value="{{myvar}}"></td>
+					{% endif %}
+				</tr>
+				<tr>
+					<td>Enter OTP</td>
+					<td><input type="password" name="uotp"></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">
+						<input type="submit" value="Validate OTP" class="btn btn-primary">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</center>
+
+
+</body>
+</html>
+{% endblock %}
